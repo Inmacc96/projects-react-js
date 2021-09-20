@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
+import Tweet from "../Tweet";
 
 import "./ListTweets.scss";
 
@@ -18,7 +19,7 @@ export default function ListTweets(props) {
     <Grid container spacing={3} className="list-tweets">
       {allTweets.map((tweet, index) => (
         <Grid key={index} item xs={4}>
-          Tweet...
+          <Tweet tweet={tweet} index={index} />
         </Grid>
       ))}
     </Grid>
