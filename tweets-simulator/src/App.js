@@ -12,18 +12,27 @@ function App() {
     text: null,
   });
   const [allTweets, setAllTweets] = useState([]);
+  const [reloadTweets, setReloadTweets] = useState(false);
 
   useEffect(() => {
     const AllTweetsStorage = localStorage.getItem(TWEETS_STORAGE);
     const allTweetsArray = JSON.parse(AllTweetsStorage);
     setAllTweets(allTweetsArray);
-  }, []);
+    setReloadTweets(false);
+  }, [reloadTweets]);
+
+  const deleteTweet = (index) => {
+    allTweets.splice(index, 1); //Elimina un elemento desde el indice index.
+    setAllTweets(allTweets);
+    localStorage.setItem(TWEETS_STORAGE, JSON.stringify(allTweets));
+    setReloadTweets(true);
+  };
 
   return (
     <Container className="tweets-simulator" maxWidth={false}>
       <Header />
       <SendTweet setToastProps={setToastProps} allTweets={allTweets} />
-      <ListTweets allTweets={allTweets} />
+      <ListTweets allTweets={allTweets} deleteTweet={deleteTweet} />
       <Snackbar
         anchorOrigin={{
           vertical: "top",
