@@ -9,7 +9,7 @@ import { TWEETS_STORAGE } from "../../utils/contants";
 import "./SendTweet.scss";
 
 export default function SendTweet(props) {
-  const { setToastProps, allTweets } = props;
+  const { setToastProps, allTweets, setReloadTweets } = props;
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const openModal = () => {
@@ -41,6 +41,7 @@ export default function SendTweet(props) {
         text: "Tweet enviado correctamente.",
       });
       closeModal();
+      setReloadTweets(true);
     }
     allTweetsArray = [];
   };
