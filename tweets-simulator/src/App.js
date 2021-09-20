@@ -28,6 +28,13 @@ function App() {
     setReloadTweets(true);
   };
 
+  const handleClose = () => {
+    setToastProps({
+      ...toastProps,
+      open: false,
+    });
+  };
+
   return (
     <Container className="tweets-simulator" maxWidth={false}>
       <Header />
@@ -39,7 +46,8 @@ function App() {
           horizontal: "right",
         }}
         open={toastProps.open}
-        autoHideDuration={1000} // 1segundo
+        autoHideDuration={3000} // 1segundo
+        onClose={handleClose}
         message={<span id="message-id">{toastProps.text}</span>}
       />
     </Container>
