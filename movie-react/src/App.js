@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MenuTop from "./components/MenuTop";
 
 //Pages
 import Home from "./pages/home";
@@ -16,7 +17,9 @@ export default function App() {
   return (
     <Layout>
       <Router>
-        <Header>Header....</Header>
+        <Header>
+          <MenuTop />
+        </Header>
 
         <Content>
           {" "}
