@@ -12,7 +12,6 @@ export default function MovieList(props) {
   if (movies.loading || !movies.result) {
     return <Loading />;
   }
-  console.log(movies.result.results);
   return (
     <List
       className="movie-list"
