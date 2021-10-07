@@ -1,12 +1,17 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
+import { URL_API, KEY_API } from "../utils/constans";
+
+import SliderMovies from "../components/SliderMovies";
 
 export default function Home() {
-  const movies = useFetch(
-    "https://api.themoviedb.org/3/movie/popular?api_key=d35c56878f963551eb582345c09533ae&language=es-ES&page=1"
+  const newMovies = useFetch(
+    `${URL_API}/movie/now_playing?api_key=${KEY_API}&language=es-ES&page=1`
   );
 
-  console.log(movies);
-
-  return "Estamos en Home";
+  return (
+    <>
+      <SliderMovies movies={newMovies} />
+    </>
+  );
 }
