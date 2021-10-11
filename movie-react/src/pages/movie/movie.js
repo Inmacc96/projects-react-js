@@ -1,10 +1,12 @@
-import React from "react";
-import { Row, Col, Botton } from "antd";
+import React, { useState } from "react";
+import { Row, Col, Button } from "antd";
+import { PlayCircleOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import useFetch from "../../hooks/useFetch";
 import { URL_API, KEY_API } from "../../utils/constans";
 import Loading from "../../components/Loading";
+import ModalVideo from "../../components/ModalVideo";
 
 import "./movie.scss";
 
@@ -56,6 +58,34 @@ function MovieInfo(props) {
     movieInfo: { id, title, release_date, overview, genres },
   } = props;
 
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const videoMovie = useFetch(
+    `${URL_API}/movie/${id}/videos?api_key=${KEY_API}&language=es-ES`
+  );
+
+  const openModal = () => setIsVisibleModal(true);
+  const closeModal = () => setIsVisibleModal(false);
+
+  const renderVideo = () => {
+    if (videoMovie.result) {
+      if (videoMovie.result.results.length > 0) {
+        return (
+          <>
+            <Button icon={<PlayCircleOutlined />} onClick={openModal}>
+              Ver trailer
+            </Button>
+            <ModalVideo
+              videoKey={videoMovie.result.results[0].key}
+              videoPlatform={videoMovie.result.results[0].site}
+              isOpen={isVisibleModal}
+              close={closeModal}
+            />
+          </>
+        );
+      }
+    }
+  };
+
   return (
     <>
       <div className="movie__info-header">
@@ -63,7 +93,8 @@ function MovieInfo(props) {
           {title}
           <span>{moment(release_date, "YYYY-MM-DD").format("YYYY")}</span>
         </h1>
-        <button>Ver trailer</button>
+        {renderVideo()}
+        {/* Los paréntesis es porque la función se ejecuta automaticamente. */}
       </div>
       <div className="movie__info-content">
         <h3>Sinopsis</h3>
