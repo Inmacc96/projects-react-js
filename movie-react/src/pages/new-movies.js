@@ -28,7 +28,9 @@ export default function NewMovies() {
       </Col>
       {movieList.results ? (
         <Col span="24">
-          <MovieCatalog movies={movieList} />
+          <Row>
+            <MovieCatalog movies={movieList} />
+          </Row>
         </Col>
       ) : (
         <Col span="24">
