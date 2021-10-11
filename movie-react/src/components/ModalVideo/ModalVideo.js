@@ -21,8 +21,6 @@ export default function ModalVideo(props) {
     }
   }, [videoKey, videoPlatform]);
 
-  console.log(props);
-
   return (
     <Modal
       className="modal-video"
