@@ -9,7 +9,7 @@ export default function TopMenu() {
     <Navbar bg="dark" variant="dark" className="top-menu">
       <Container>
         <BrandNav />
-        <MenuNav />
+        {/* <MenuNav /> */}
         {/*  Carrito */}
       </Container>
     </Navbar>
