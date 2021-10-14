@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import Product from "../Product";
 import Loading from "../Loading";
 
 import "./Products.scss";
@@ -17,9 +18,7 @@ export default function Products(props) {
           </Col>
         ) : (
           result.map((product, index) => (
-            <div>
-              <p>{product.name}</p>
-            </div>
+            <Product key={index} product={product} />
           ))
         )}
       </Row>
