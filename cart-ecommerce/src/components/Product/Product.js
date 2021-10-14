@@ -1,11 +1,11 @@
 import React from "react";
 import { Col, Card, Button } from "react-bootstrap";
-import { BASE_PATH } from "../../utils/constans";
+import { BASE_PATH } from "../../utils/constants";
 
 import "./Product.scss";
 
 export default function Product(props) {
-  const { product } = props;
+  const { product, addProductCart } = props;
 
   return (
     <Col xs={3} className="product">
@@ -14,8 +14,11 @@ export default function Product(props) {
         <Card.Body>
           <Card.Title>{product.name}</Card.Title>
           <Card.Text>{product.extraInfo}</Card.Text>
-          <Card.Text>{product.price} € / Unidad.</Card.Text>
-          <Button>Añadir al carrito</Button>
+          <Card.Text>{product.price.toFixed(2)} € / Unidad.</Card.Text>{" "}
+          {/* Para trabajar con dos decimales .toFixed(2) */}
+          <Button onClick={() => addProductCart(product.id, product.name)}>
+            Añadir al carrito
+          </Button>
         </Card.Body>
       </Card>
     </Col>

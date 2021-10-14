@@ -8,6 +8,7 @@ import "./Products.scss";
 export default function Products(props) {
   const {
     products: { result, loading, error },
+    addProductCart,
   } = props;
   return (
     <Container>
@@ -18,7 +19,11 @@ export default function Products(props) {
           </Col>
         ) : (
           result.map((product, index) => (
-            <Product key={index} product={product} />
+            <Product
+              key={index}
+              product={product}
+              addProductCart={addProductCart}
+            />
           ))
         )}
       </Row>
