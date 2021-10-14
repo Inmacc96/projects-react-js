@@ -7,7 +7,7 @@ import "./MenuTop.scss";
 
 function MenuTop(props) {
   const { pathname } = props.location;
-  console.log(pathname);
+
   return (
     <div className="menu-top">
       <div className="menu-top__logo">
