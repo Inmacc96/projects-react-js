@@ -1,0 +1,19 @@
+.cart {
+  svg {
+    width: 30px;
+    fill: #fff;
+  }
+}
+
+.cart-content {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #343a40;
+  height: 100vh;
+  text-align: left;
+  white-space: nowrap;
+  transition: width 1s;
+  z-index: 9;
+}
