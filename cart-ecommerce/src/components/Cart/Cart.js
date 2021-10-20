@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { ReactComponent as CartEmpty } from "../../assets/svg/cart-empty.svg";
 import { ReactComponent as CartFull } from "../../assets/svg/cart-full.svg";
+import { ReactComponent as Close } from "../../assets/svg/close.svg";
+import { ReactComponent as Garbage } from "../../assets/svg/garbage.svg";
 
 import "./Cart.scss";
 
@@ -30,8 +32,26 @@ export default function Cart(props) {
         )}
       </Button>
       <div className="cart-content" style={{ width: widthCartContet }}>
-        Todos mis productos
+        <CartContentHeader />
+        Todos mis productos.....
       </div>
     </>
+  );
+}
+
+function CartContentHeader(props) {
+  const {} = props;
+
+  return (
+    <div className="cart-content__header">
+      <div>
+        <Close />
+        <h2>Carrito</h2>
+      </div>
+
+      <Button variant="link">
+        <Garbage />
+      </Button>
+    </div>
   );
 }
