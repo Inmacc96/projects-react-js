@@ -8,6 +8,7 @@ import { STORAGE_PRODUCTS_CART, BASE_PATH } from "../../utils/constants";
 import {
   removeArrayDuplicates,
   countDuplicatesItemArray,
+  removeItemArray,
 } from "../../utils/arrayFunc";
 
 import "./Cart.scss";
@@ -38,6 +39,20 @@ export default function Cart(props) {
     getProductsCart();
   };
 
+  const increaseQuantity = (id) => {
+    const arrayItemsCart = productsCart;
+    arrayItemsCart.push(id);
+    localStorage.setItem(STORAGE_PRODUCTS_CART, arrayItemsCart);
+    getProductsCart();
+  };
+
+  const decreaseQuantity = (id) => {
+    const arrayItemsCart = productsCart;
+    const result = removeItemArray(arrayItemsCart, id.toString());
+    localStorage.setItem(STORAGE_PRODUCTS_CART, result);
+    getProductsCart();
+  };
+
   return (
     <>
       <Button variant="link" className="cart">
@@ -56,6 +71,8 @@ export default function Cart(props) {
               products={products}
               idsProductsCart={productsCart}
               idProductCart={idProductCart}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
             />
           ))}
         </div>
@@ -86,6 +103,8 @@ function CartContentProducts(props) {
     products: { loading, result },
     idsProductsCart,
     idProductCart,
+    increaseQuantity,
+    decreaseQuantity,
   } = props;
 
   if (!loading && result) {
@@ -93,7 +112,13 @@ function CartContentProducts(props) {
       if (idProductCart == product.id) {
         const quantity = countDuplicatesItemArray(product.id, idsProductsCart);
         return (
-          <RenderProduct key={index} product={product} quantity={quantity} />
+          <RenderProduct
+            key={index}
+            product={product}
+            quantity={quantity}
+            increaseQuantity={increaseQuantity}
+            decreaseQuantity={decreaseQuantity}
+          />
         );
       }
     });
@@ -102,7 +127,7 @@ function CartContentProducts(props) {
 }
 
 function RenderProduct(props) {
-  const { product, quantity } = props;
+  const { product, quantity, increaseQuantity, decreaseQuantity } = props;
 
   return (
     <div className="cart-content__product">
@@ -115,8 +140,8 @@ function RenderProduct(props) {
         <div>
           <p>En carro: {quantity} ud. </p>
           <div>
-            <button>+</button>
-            <button>-</button>
+            <button onClick={() => increaseQuantity(product.id)}>+</button>
+            <button onClick={() => decreaseQuantity(product.id)}>-</button>
           </div>
         </div>
       </div>
