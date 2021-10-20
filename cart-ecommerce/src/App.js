@@ -30,13 +30,13 @@ function App() {
     idsProducts.push(id);
     setProductsCart(idsProducts);
     localStorage.setItem(STORAGE_PRODUCTS_CART, productsCart);
-    getProductsCart(); // para que se recargue productsCart
+    getProductsCart(); // para que se recargue el estado de productsCart
     toast.success(`${name} añadido al carrito correctamente.`);
   };
 
   return (
     <div>
-      <TopMenu productsCart={productsCart} />
+      <TopMenu productsCart={productsCart} getProductsCart={getProductsCart} />
       <Products products={products} addProductCart={addProductCart} />
       <ToastContainer
         position="bottom-left"
