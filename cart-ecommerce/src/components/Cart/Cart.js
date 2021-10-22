@@ -16,7 +16,7 @@ import "./Cart.scss";
 export default function Cart(props) {
   const { products, productsCart, getProductsCart } = props;
   const [cartOpen, setCartOpen] = useState(false);
-  const widthCartContet = cartOpen ? 400 : 0;
+  const widthCartContent = cartOpen ? 400 : 0;
   const [singleProductsCart, setSingleProductsCart] = useState([]);
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
@@ -37,21 +37,21 @@ export default function Cart(props) {
         quantity: quantity,
       };
       productData.push(productValue);
-
-      if (!products.loading && products.result) {
-        products.result.forEach((product) =>
-          productData.forEach((item) => {
-            if (product.id == item.id) {
-              const totalValue = product.price * item.quantity;
-              totalPrice = totalPrice + totalValue;
-            }
-          })
-        );
-      }
-
-      setCartTotalPrice(totalPrice);
     });
-  }, [productsCart]);
+
+    if (!products.loading && products.result) {
+      products.result.forEach((product) =>
+        productData.forEach((item) => {
+          if (product.id == item.id) {
+            const totalValue = product.price * item.quantity;
+            totalPrice = totalPrice + totalValue;
+          }
+        })
+      );
+    }
+
+    setCartTotalPrice(totalPrice);
+  }, [productsCart, products]);
 
   const openCart = () => {
     setCartOpen(true);
@@ -91,7 +91,7 @@ export default function Cart(props) {
           <CartEmpty onClick={openCart} />
         )}
       </Button>
-      <div className="cart-content" style={{ width: widthCartContet }}>
+      <div className="cart-content" style={{ width: widthCartContent }}>
         <CartContentHeader closeCart={closeCart} emptyCart={emptyCart} />
         <div className="cart-content__products">
           {singleProductsCart.map((idProductCart, index) => (
@@ -185,7 +185,7 @@ function CartContentFooter(props) {
   return (
     <div className="cart-content__footer">
       <div>
-        <p>Total aproximado:</p>
+        <p>Total aproximado: </p>
         <p>{cartTotalPrice.toFixed(2)} €</p>
       </div>
       <Button>Tramitar pedido</Button>
