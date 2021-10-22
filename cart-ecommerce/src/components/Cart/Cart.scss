@@ -84,7 +84,7 @@
     }
 
     .cart-content__product-info {
-      color: #fff;
+      color: #fff !important;
       width: 100%;
 
       h3 {
@@ -102,19 +102,19 @@
           margin-top: 15px;
           display: flex;
           justify-content: space-between;
-        }
 
-        p {
-          margin: 0;
-        }
-        button {
-          background-color: #0098d3;
-          border-color: #0098d3;
-          color: #fff;
-          border-radius: 5px;
-          margin: 0 5px;
-          width: 30px;
-          height: 30px;
+          p {
+            margin: 0;
+          }
+          button {
+            background-color: #0098d3;
+            border-color: #0098d3;
+            color: #fff;
+            border-radius: 5px;
+            margin: 0 5px;
+            width: 30px;
+            height: 30px;
+          }
         }
       }
     }
