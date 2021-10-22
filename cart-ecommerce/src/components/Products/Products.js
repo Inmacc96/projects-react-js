@@ -10,6 +10,7 @@ export default function Products(props) {
     products: { result, loading, error },
     addProductCart,
   } = props;
+
   return (
     <Container>
       <Row>
