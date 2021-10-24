@@ -26,11 +26,11 @@ function App() {
   };
 
   const addProductCart = (id, name) => {
-    const idsProducts = productsCart;
-    idsProducts.push(id);
+    const idsProducts = [...productsCart]; // Hacemos una copia del array productsCart
+    idsProducts.push(id.toString());
     setProductsCart(idsProducts);
     localStorage.setItem(STORAGE_PRODUCTS_CART, productsCart);
-    getProductsCart(); // para que se recargue el estado de productsCart
+    // getProductsCart(); // para que se recargue el estado de productsCart
     toast.success(`${name} añadido al carrito correctamente.`);
   };
 
