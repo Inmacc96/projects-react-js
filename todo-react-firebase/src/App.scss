@@ -13,4 +13,24 @@
       color: #fff;
     }
   }
+
+  .todo {
+    margin: 60px 0 0 0;
+
+    &__title {
+      background-color: #fff;
+      height: 90px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      display: flex;
+      align-items: center; //centrado verticalmente
+      justify-content: center; //centrado horizontalmente
+      border: 1px solid #dadada;
+
+      h2 {
+        color: #008dd0;
+        letter-spacing: 10px; //separar letras entre sí
+      }
+    }
+  }
 }
