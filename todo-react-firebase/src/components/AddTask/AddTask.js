@@ -23,6 +23,7 @@ export default function AddTask() {
           completed: false,
         }) // Es una promesa
         .then(() => {
+          setTask("");
           console.log("Tarea creada");
         });
     }
@@ -34,6 +35,7 @@ export default function AddTask() {
         type="text"
         placeholder="Nueva tarea..."
         onChange={(e) => setTask(e.target.value)}
+        value={task} //El valor del formulario corresponde al valor del estado task
       />
       <Button type="submit">
         <Send />
