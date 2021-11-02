@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { map } from "lodash";
+import firebase from "./utils/firebase";
+import "firebase/firestore";
 import AddTask from "./components/AddTask";
 
 import "./App.scss";
 
+const db = firebase.firestore(firebase);
+
 export default function App() {
+  const [tasks, setTasks] = useState([]);
+
+  console.log(tasks);
+
+  useEffect(() => {
+    db.collection("tasks")
+      .orderBy("completed")
+      .get()
+      .then((response) => {
+        const arrayTasks = [];
+        map(response.docs, (task) => {
+          const data = task.data();
+          data.id = task.id;
+          arrayTasks.push(data);
+        });
+        setTasks(arrayTasks);
+      });
+  }, []);
+
   return (
     <div>
       <Container fluid className="app">
