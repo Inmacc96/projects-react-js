@@ -61,7 +61,9 @@ export default function App() {
             ) : size(tasks) == 0 ? (
               <h3> No hay tareas pendientes </h3>
             ) : (
-              map(tasks, (task, index) => <Task key={index} task={task} />)
+              map(tasks, (task, index) => (
+                <Task key={index} task={task} setReloadTasks={setReloadTasks} />
+              ))
             )}
           </Col>
           <Col
