@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { map } from "lodash";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { map, size } from "lodash";
 import firebase from "./utils/firebase";
 import "firebase/firestore";
 import AddTask from "./components/AddTask";
@@ -11,7 +11,7 @@ import "./App.scss";
 const db = firebase.firestore(firebase);
 
 export default function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(null);
   const [reloadTasks, setReloadTasks] = useState(false);
 
   useEffect(() => {
@@ -53,9 +53,16 @@ export default function App() {
             xs={{ span: 10, offset: 1 }}
             md={{ span: 6, offset: 3 }}
           >
-            {map(tasks, (task, index) => (
-              <Task key={index} task={task} />
-            ))}
+            {!tasks ? (
+              <div className="loading">
+                <Spinner animation="border" />
+                <span>Cargando...</span>
+              </div>
+            ) : size(tasks) == 0 ? (
+              <h3> No hay tareas pendientes </h3>
+            ) : (
+              map(tasks, (task, index) => <Task key={index} task={task} />)
+            )}
           </Col>
           <Col
             className="todo__input"
