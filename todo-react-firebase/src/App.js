@@ -4,6 +4,7 @@ import { map } from "lodash";
 import firebase from "./utils/firebase";
 import "firebase/firestore";
 import AddTask from "./components/AddTask";
+import Task from "./components/Task";
 
 import "./App.scss";
 
@@ -11,8 +12,6 @@ const db = firebase.firestore(firebase);
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
-
-  console.log(tasks);
 
   useEffect(() => {
     db.collection("tasks")
@@ -52,7 +51,9 @@ export default function App() {
             xs={{ span: 10, offset: 1 }}
             md={{ span: 6, offset: 3 }}
           >
-            <p> Lista de tareas</p>
+            {map(tasks, (task, index) => (
+              <Task key={index} task={task} />
+            ))}
           </Col>
           <Col
             className="todo__input"
