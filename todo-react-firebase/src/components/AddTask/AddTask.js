@@ -10,7 +10,8 @@ import "./AddTask.scss";
 //Inicializar la base de datos
 const db = firebase.firestore(firebase);
 
-export default function AddTask() {
+export default function AddTask(props) {
+  const { setReloadTasks } = props;
   const [task, setTask] = useState("");
 
   const onSubmit = (e) => {
@@ -24,7 +25,7 @@ export default function AddTask() {
         }) // Es una promesa
         .then(() => {
           setTask("");
-          console.log("Tarea creada");
+          setReloadTasks(true);
         });
     }
   };
