@@ -22,6 +22,13 @@ export default function Task(props) {
       });
   };
 
+  const deleteTask = () => {
+    db.collection("tasks")
+      .doc(task.id)
+      .delete()
+      .then(() => setReloadTasks(true));
+  };
+
   return (
     <div className="task">
       <div>
@@ -32,7 +39,7 @@ export default function Task(props) {
       </div>
       <div>{task.name}</div>
       <div>
-        <Delete />
+        <Delete onClick={deleteTask} />
       </div>
     </div>
   );
