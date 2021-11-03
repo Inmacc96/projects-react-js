@@ -31,50 +31,48 @@ export default function App() {
   }, [reloadTasks]);
 
   return (
-    <div>
-      <Container fluid className="app">
-        {/* fluid: para que la cabecera ocupe todo el ancho. */}
-        <div className="title">
-          <h1>Listado de tareas diarias</h1>
-        </div>
+    <Container fluid className="app">
+      {/* fluid: para que la cabecera ocupe todo el ancho. */}
+      <div className="title">
+        <h1>Listado de tareas diarias</h1>
+      </div>
 
-        <Row className="todo">
-          <Col
-            className="todo__title"
-            xs={{ span: 10, offset: 1 }}
-            md={{ span: 6, offset: 3 }}
-          >
-            {/*  Bootstrap tabaja con 12 columnas, lo anterior significa 
+      <Row className="todo">
+        <Col
+          className="todo__title"
+          xs={{ span: 10, offset: 1 }}
+          md={{ span: 6, offset: 3 }}
+        >
+          {/*  Bootstrap tabaja con 12 columnas, lo anterior significa 
          que va ocupar 6 columnas y tendra 3 columnas separadas de la derecha y otra 3 de la izquierda  */}
-            <h2>Today</h2>
-          </Col>
-          <Col
-            className="todo__list"
-            xs={{ span: 10, offset: 1 }}
-            md={{ span: 6, offset: 3 }}
-          >
-            {!tasks ? (
-              <div className="loading">
-                <Spinner animation="border" />
-                <span>Cargando...</span>
-              </div>
-            ) : size(tasks) == 0 ? (
-              <h3> No hay tareas pendientes </h3>
-            ) : (
-              map(tasks, (task, index) => (
-                <Task key={index} task={task} setReloadTasks={setReloadTasks} />
-              ))
-            )}
-          </Col>
-          <Col
-            className="todo__input"
-            xs={{ span: 10, offset: 1 }}
-            md={{ span: 6, offset: 3 }}
-          >
-            <AddTask setReloadTasks={setReloadTasks} />
-          </Col>
-        </Row>
-      </Container>
-    </div>
+          <h2>Today</h2>
+        </Col>
+        <Col
+          className="todo__list"
+          xs={{ span: 10, offset: 1 }}
+          md={{ span: 6, offset: 3 }}
+        >
+          {!tasks ? (
+            <div className="loading">
+              <Spinner animation="border" />
+              <span>Cargando...</span>
+            </div>
+          ) : size(tasks) == 0 ? (
+            <h3> No hay tareas pendientes </h3>
+          ) : (
+            map(tasks, (task, index) => (
+              <Task key={index} task={task} setReloadTasks={setReloadTasks} />
+            ))
+          )}
+        </Col>
+        <Col
+          className="todo__input"
+          xs={{ span: 10, offset: 1 }}
+          md={{ span: 6, offset: 3 }}
+        >
+          <AddTask setReloadTasks={setReloadTasks} />
+        </Col>
+      </Row>
+    </Container>
   );
 }
