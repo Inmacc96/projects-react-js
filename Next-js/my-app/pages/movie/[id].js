@@ -2,7 +2,7 @@ import React from "react";
 import Menu from "../../components/Menu";
 import Router, { useRouter } from "next/router";
 
-export default function movie() {
+export default function Movie() {
   const router = useRouter();
   const { id } = router.query;
 
@@ -20,3 +20,8 @@ export default function movie() {
     </div>
   );
 }
+
+//Es obligatorio tener getInitialProps en todas las páginas.
+Movie.getInitialProps = async () => {
+  return {};
+};
