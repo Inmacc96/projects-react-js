@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "../components/Menu";
 import Link from "next/link";
+import fetch from "isomorphic-unfetch";
 
 export default function movies(props) {
   const { movies } = props;
@@ -18,11 +19,8 @@ export default function movies(props) {
 }
 
 movies.getInitialProps = async () => {
-  const movies = [
-    { id: "joker", name: "Joker" },
-    { id: "spiderman", name: "Spider-Man" },
-    { id: "batman", name: "Batman" },
-  ];
+  const res = await fetch("https://api.jsonserve.com/3fkD1V");
+  const movies = await res.json();
 
   return { movies };
 };
