@@ -9,6 +9,11 @@ export default function (state = initialProps, action) {
         ...state,
         tweets: [...state.tweets, action.payload],
       };
+    case "DELETE_TWEET":
+      return {
+        ...state,
+        tweets: state.tweets.filter((tweet) => tweet.id !== action.payload),
+      };
     default:
       return state;
   }
