@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { validationFormAddTweetAction } from "../actions/validationActions";
+import { addTweetAction } from "../actions/tweetsActions";
+import { openCloseAddTweetModalAction } from "../actions/modalsActions";
+import moment from "moment";
+import { v4 as uuid } from "uuid";
 
 export default function FormAddTweet() {
   const [formValue, setFormValue] = useState({
@@ -12,6 +16,8 @@ export default function FormAddTweet() {
   // Inicialización del dispatch y ejecución de las acciones
   const dispath = useDispatch();
   const errorForm = (state) => dispath(validationFormAddTweetAction(state));
+  const addTweet = (state) => dispath(addTweetAction(state));
+  const closeModal = (state) => dispath(openCloseAddTweetModalAction(state));
 
   // Obtener estado de la validación del formulario
   const errorFormValue = useSelector(
@@ -33,6 +39,13 @@ export default function FormAddTweet() {
       errorForm(true);
     } else {
       errorForm(false);
+      addTweet({
+        id: uuid(),
+        name,
+        tweet,
+        date: moment(),
+      });
+      closeModal(false);
     }
   };
 
