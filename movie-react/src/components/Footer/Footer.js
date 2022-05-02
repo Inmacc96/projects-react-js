@@ -8,7 +8,7 @@ export default function Footer() {
 
   return (
     <Footer className="footer">
-      <p>Inma Caballero Carrero</p>
+      <p> &copy; Creado por Inma Caballero Carrero</p>
     </Footer>
   );
 }
